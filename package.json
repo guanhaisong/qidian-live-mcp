@@ -1,6 +1,7 @@
 {
   "name": "qidian-live-mcp",
-  "version": "1.0.0",
+  "version": "1.0.1",
+  "mcpName": "io.github.guanhaisong/qidian-live",
   "description": "麒典直播工作台 MCP 服务：让 AI 编辑器查看直播状态、开播停止、自检、复盘留人数据、改写口播稿。",
   "bin": {
     "qidian-live-mcp": "bin/qidian-live-mcp.js"
@@ -24,5 +25,13 @@
     "视频号"
   ],
   "license": "MIT",
-  "author": "麒典"
+  "author": "麒典",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guanhaisong/qidian-live-mcp.git"
+  },
+  "homepage": "https://github.com/guanhaisong/qidian-live-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/guanhaisong/qidian-live-mcp/issues"
+  }
 }
