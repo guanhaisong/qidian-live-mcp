@@ -4,7 +4,7 @@
 #   可选：-Private 建私有仓库；-Name 改仓库名
 param(
     [string]$Token = $env:GITEE_TOKEN,
-    [string]$Name = "hana-live-mcp",
+    [string]$Name = "qidian-live-mcp",
     [string]$Desc = "麒典直播工作台的 MCP 服务：让 TRAE/Cursor/Claude 等编辑器查看与控制本地直播工作台",
     [switch]$Private
 )

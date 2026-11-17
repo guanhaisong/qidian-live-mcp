@@ -1,9 +1,9 @@
 {
-  "name": "hana-live-mcp",
+  "name": "qidian-live-mcp",
   "version": "1.0.0",
   "description": "麒典直播工作台 MCP 服务：让 AI 编辑器查看直播状态、开播停止、自检、复盘留人数据、改写口播稿。",
   "bin": {
-    "hana-live-mcp": "bin/hana-live-mcp.js"
+    "qidian-live-mcp": "bin/qidian-live-mcp.js"
   },
   "files": [
     "bin/",

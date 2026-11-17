@@ -49,8 +49,8 @@ Say "npm: $who" "Green"
 Say "== 2/5 补 package.json（mcpName / repository）==" "Cyan"
 $pkgPath = Join-Path $PSScriptRoot "package.json"
 $pkg = Get-Content $pkgPath -Raw -Encoding UTF8 | ConvertFrom-Json
-$serverName = "io.github.$login/hana-live"
-$repoUrl = "https://github.com/$login/hana-live-mcp"
+$serverName = "io.github.$login/qidian-live"
+$repoUrl = "https://github.com/$login/qidian-live-mcp"
 
 $pkg | Add-Member -NotePropertyName "mcpName" -NotePropertyValue $serverName -Force
 $pkg | Add-Member -NotePropertyName "repository" -NotePropertyValue ([pscustomobject]@{ type = "git"; url = "$repoUrl.git" }) -Force
@@ -74,7 +74,7 @@ $server = [ordered]@{
     packages    = @(
         [ordered]@{
             registryType = "npm"
-            identifier   = "hana-live-mcp"
+            identifier   = "qidian-live-mcp"
             version      = $ver
             transport    = [ordered]@{ type = "stdio" }
         }
@@ -88,9 +88,9 @@ Say "server.json 已写入（$serverName @ $ver）" "Green"
 # ---------- 3. 查重 ----------
 Say "== 4/5 检查 npm 上是否已有这个版本 ==" "Cyan"
 $published = $null
-try { $published = (& npm view "hana-live-mcp@$ver" version 2>$null) } catch { }
-if ($published) { Say "npm 上已有 hana-live-mcp@$ver，跳过发布" "Yellow" }
-else { Say "npm 上还没有 hana-live-mcp@$ver" "Gray" }
+try { $published = (& npm view "qidian-live-mcp@$ver" version 2>$null) } catch { }
+if ($published) { Say "npm 上已有 qidian-live-mcp@$ver，跳过发布" "Yellow" }
+else { Say "npm 上还没有 qidian-live-mcp@$ver" "Gray" }
 
 # ---------- 4. mcp-publisher ----------
 Say "== 5/5 检查 mcp-publisher ==" "Cyan"
@@ -137,6 +137,6 @@ if ($exe) {
     Say "  3) mcp-publisher publish" "White"
 }
 Say "" 
-Say "验证：npm view hana-live-mcp version / 官方目录搜 $serverName" "Gray"
+Say "验证：npm view qidian-live-mcp version / 官方目录搜 $serverName" "Gray"
 
 if ($CheckOnly) { Say "（-CheckOnly：没有真的发布）" "Yellow" }

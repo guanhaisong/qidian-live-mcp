@@ -1,6 +1,6 @@
-# hana-live-mcp
+# qidian-live-mcp
 
-[![license](https://img.shields.io/npm/l/hana-live-mcp.svg)](./LICENSE)
+[![license](https://img.shields.io/npm/l/qidian-live-mcp.svg)](./LICENSE)
 
 麒典直播工作台的 MCP 服务。让 TRAE / Cursor / Claude / Codex 这类支持 MCP 的编辑器，直接在对话里查看直播状态、开播停止、跑自检、复盘留人数据、改写口播稿。
 
@@ -37,7 +37,7 @@
 ```json
 {
   "mcpServers": {
-    "hana-live": {
+    "qidian-live": {
       "command": "C:\\Users\\你\\AppData\\Local\\麒典直播工作台\\runtime\\python\\python.exe",
       "args": ["C:\\Users\\你\\AppData\\Local\\麒典直播工作台\\工作台\\mcp_server.py"]
     }
@@ -54,9 +54,9 @@
 ```json
 {
   "mcpServers": {
-    "hana-live": {
+    "qidian-live": {
       "command": "python",
-      "args": ["D:\\路径\\hana-live-mcp\\mcp_server.py"]
+      "args": ["D:\\路径\\qidian-live-mcp\\mcp_server.py"]
     }
   }
 }
@@ -67,10 +67,10 @@
 ```json
 {
   "mcpServers": {
-    "hana-live": {
+    "qidian-live": {
       "command": "python",
-      "args": ["D:\\路径\\hana-live-mcp\\mcp_server.py"],
-      "env": { "HANA_HOST": "http://127.0.0.1:8788" }
+      "args": ["D:\\路径\\qidian-live-mcp\\mcp_server.py"],
+      "env": { "QIDIAN_HOST": "http://127.0.0.1:8788" }
     }
   }
 }
@@ -81,9 +81,9 @@
 ```json
 {
   "mcpServers": {
-    "hana-live": {
+    "qidian-live": {
       "command": "npx",
-      "args": ["-y", "hana-live-mcp"]
+      "args": ["-y", "qidian-live-mcp"]
     }
   }
 }
@@ -93,22 +93,22 @@
 
 | 工具 | 作用 |
 | --- | --- |
-| `hana_state` | 是否在播、轮次、当前段和第几句、在线/看过/评论、掉人最多段、需求榜、合规计数、救场次数、告警、最近日志 |
-| `hana_start` / `hana_stop` | 开播 / 停止 |
-| `hana_pause` | 暂停或继续（`on: true/false`） |
-| `hana_selftest` | 七项体检：稿子 / 语音 / 大屏 / 弹幕 / 声卡 / 合规词 / 开场钩子 |
-| `hana_stay` | 段落留人表：净掉人数、段内掉得最狠那句、TOP3 |
-| `hana_kw` | 观众需求榜（按次数） |
-| `hana_log` | 最近运行日志 |
-| `hana_fix` | 给掉人最多的段生成 3 个改法 |
-| `hana_fix_apply` | 选定一版写回 `话术.md`（写入前扫违禁词） |
-| `hana_ask` | 按知识库 + 红线试答一条弹幕，不开口播 |
+| `qidian_state` | 是否在播、轮次、当前段和第几句、在线/看过/评论、掉人最多段、需求榜、合规计数、救场次数、告警、最近日志 |
+| `qidian_start` / `qidian_stop` | 开播 / 停止 |
+| `qidian_pause` | 暂停或继续（`on: true/false`） |
+| `qidian_selftest` | 七项体检：稿子 / 语音 / 大屏 / 弹幕 / 声卡 / 合规词 / 开场钩子 |
+| `qidian_stay` | 段落留人表：净掉人数、段内掉得最狠那句、TOP3 |
+| `qidian_kw` | 观众需求榜（按次数） |
+| `qidian_log` | 最近运行日志 |
+| `qidian_fix` | 给掉人最多的段生成 3 个改法 |
+| `qidian_fix_apply` | 选定一版写回 `话术.md`（写入前扫违禁词） |
+| `qidian_ask` | 按知识库 + 红线试答一条弹幕，不开口播 |
 
 ## 合规
 
 - 这个工具是**真人主播的副驾**，不是无人直播。开播必须真人出镜，平台明确禁止无人/录播。
 - 所有口播走工作台的护栏：命中联系方式、收益承诺、绝对化、利益诱导等违禁词，那一句会被跳过。
-- `hana_fix_apply` 写回前会再扫一遍，命中直接拒绝。
+- `qidian_fix_apply` 写回前会再扫一遍，命中直接拒绝。
 - 本仓库不含任何直播平台账号、抓取脚本或绕过风控的实现。
 
 ## 常见问题
@@ -117,17 +117,17 @@
 先双击工作台快捷方式，等台面出来（约 5 秒）再重试。
 
 **`npx` 卡住不动**
-国内网络换 `npm i -g hana-live-mcp` 再用手册第二种配置。
+国内网络换 `npm i -g qidian-live-mcp` 再用手册第二种配置。
 
 **改了端口**
-工作台默认 8787；换了就在 `env` 里设 `HANA_HOST`。
+工作台默认 8787；换了就在 `env` 里设 `QIDIAN_HOST`。
 
 ## 开发
 
 ```bash
 git clone <this repo>
-cd hana-live-mcp
-node bin/hana-live-mcp.js     # 直接跑，stdin 收 JSON-RPC
+cd qidian-live-mcp
+node bin/qidian-live-mcp.js     # 直接跑，stdin 收 JSON-RPC
 ```
 
 零依赖，没有 `npm install` 这一步。
@@ -136,7 +136,7 @@ node bin/hana-live-mcp.js     # 直接跑，stdin 收 JSON-RPC
 
 MCP 生态里"一次开发、到处能装"靠三样东西：统一协议、npm 包、官方目录。对应到本仓库：
 
-1. `package.json` 里的 `mcpName`（形如 `io.github.<用户名>/hana-live`）
+1. `package.json` 里的 `mcpName`（形如 `io.github.<用户名>/qidian-live`）
 2. `server.json`（声明 `registryType: npm` + `transport: stdio`）
 3. npm 包本体（官方目录只存元数据，不存包）
 
