@@ -1,5 +1,5 @@
 ﻿# -*- coding: utf-8 -*-
-# 花酱 MCP 上架脚本：补 mcpName、生成 server.json、查依赖、发 npm、进官方目录
+# 麒典 MCP 上架脚本：补 mcpName、生成 server.json、查依赖、发 npm、进官方目录
 # 用法：powershell -ExecutionPolicy Bypass -File .\publish.ps1
 #       powershell ... .\publish.ps1 -CheckOnly    # 只体检，不发布
 param(
@@ -67,7 +67,7 @@ $ver = $pkg.version
 $server = [ordered]@{
     '${SCHEMA}' = "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json"
     name        = $serverName
-    title       = "花酱直播工作台"
+    title       = "麒典直播工作台"
     description = "Control and inspect a local live-streaming workbench (status, start/stop, self-test, retention data, script rewrite)."
     repository  = [ordered]@{ url = $repoUrl; source = "github" }
     version     = $ver

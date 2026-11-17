@@ -1,7 +1,7 @@
 {
   "name": "hana-live-mcp",
   "version": "1.0.0",
-  "description": "花酱直播工作台 MCP 服务：让 AI 编辑器查看直播状态、开播停止、自检、复盘留人数据、改写口播稿。",
+  "description": "麒典直播工作台 MCP 服务：让 AI 编辑器查看直播状态、开播停止、自检、复盘留人数据、改写口播稿。",
   "bin": {
     "hana-live-mcp": "bin/hana-live-mcp.js"
   },
@@ -24,5 +24,5 @@
     "视频号"
   ],
   "license": "MIT",
-  "author": "花酱"
+  "author": "麒典"
 }
