@@ -1,8 +1,25 @@
 # hana-live-mcp
 
-花酱直播工作台的 MCP 服务。让 TRAE / Cursor / Claude 这类支持 MCP 的编辑器，直接在对话里查看直播状态、开播停止、跑自检、复盘留人数据、改写口播稿。
+[![npm](https://img.shields.io/npm/v/hana-live-mcp.svg)](https://www.npmjs.com/package/hana-live-mcp)
+[![license](https://img.shields.io/npm/l/hana-live-mcp.svg)](./LICENSE)
+[![MCP Registry](https://img.shields.io/badge/MCP%20Registry-io.github.hana%2Fhana--live-blue)](https://registry.modelcontextprotocol.io)
+
+花酱直播工作台的 MCP 服务。让 TRAE / Cursor / Claude / Codex 这类支持 MCP 的编辑器，直接在对话里查看直播状态、开播停止、跑自检、复盘留人数据、改写口播稿。
 
 > 这个包只是「遥控器」。真正的直播能力在本地工作台（Windows 应用），两者通过 `127.0.0.1:8787` 通信。
+
+## 谁能用
+
+只要客户端**跑在主播这台电脑上、并且支持 stdio 型 MCP**，就能用，配置都是同一段 JSON：
+
+| 客户端 | 可用 | 说明 |
+| --- | --- | --- |
+| TRAE / Cursor / Windsurf / Cline / Continue | 是 | 桌面端，填 `mcpServers` |
+| Claude Desktop / Claude Code | 是 | Desktop 用 `claude_desktop_config.json`；Code 用 `claude mcp add` |
+| Codex CLI / VS Code + Copilot | 是 | 支持本地 stdio MCP |
+| 豆包网页、扣子/Coze、百度智能体等云端 | 否 | 它们跑在厂商服务器上，连不到主播电脑的 `127.0.0.1:8787` |
+
+云端智能体要接，只有把它们能访问的公网 MCP 地址暴露出来，那等于把直播间控制口开放到公网，需要单独做鉴权和限流，本项目不做。
 
 ## 前提
 
@@ -98,6 +115,25 @@ node bin/hana-live-mcp.js     # 直接跑，stdin 收 JSON-RPC
 ```
 
 零依赖，没有 `npm install` 这一步。
+
+## 发布 / 上架（维护者看）
+
+MCP 生态里"一次开发、到处能装"靠三样东西：统一协议、npm 包、官方目录。对应到本仓库：
+
+1. `package.json` 里的 `mcpName`（形如 `io.github.<用户名>/hana-live`）
+2. `server.json`（声明 `registryType: npm` + `transport: stdio`）
+3. npm 包本体（官方目录只存元数据，不存包）
+
+`publish.ps1` 会把前两样按当前登录的 GitHub 用户名自动补好，再提示剩下的授权步骤：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\publish.ps1       # 体检 + 生成 + 下载 publisher
+npm publish --access public
+mcp-publisher login github
+mcp-publisher publish
+```
+
+`-CheckOnly` 只体检不发布。
 
 ## License
 
