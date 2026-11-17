@@ -1,12 +1,12 @@
 # hana-live-mcp
 
-[![npm](https://img.shields.io/npm/v/hana-live-mcp.svg)](https://www.npmjs.com/package/hana-live-mcp)
 [![license](https://img.shields.io/npm/l/hana-live-mcp.svg)](./LICENSE)
-[![MCP Registry](https://img.shields.io/badge/MCP%20Registry-io.github.hana%2Fhana--live-blue)](https://registry.modelcontextprotocol.io)
 
 花酱直播工作台的 MCP 服务。让 TRAE / Cursor / Claude / Codex 这类支持 MCP 的编辑器，直接在对话里查看直播状态、开播停止、跑自检、复盘留人数据、改写口播稿。
 
 > 这个包只是「遥控器」。真正的直播能力在本地工作台（Windows 应用），两者通过 `127.0.0.1:8787` 通信。
+>
+> npm 包暂未上架（发布流程见文末），目前用**本机路径**方式接入，效果完全一样。
 
 ## 谁能用
 
@@ -24,36 +24,39 @@
 ## 前提
 
 1. 本机已安装并启动「花酱直播工作台」（Windows 应用，双击桌面快捷方式，台面打开即算起来）。
-2. Node.js ≥ 18（`node -v` 能出版本号即可）。
+2. 方式一、二用 Python 3.10+（安装包自带运行时，不用另装）；方式三用 Node.js ≥ 18。
 
 工作台没启动时，所有工具都会返回一句「工作台没启动」，不会报错崩溃。
 
 ## 安装
 
-在编辑器的 MCP 配置里加一段（TRAE / Cursor 都是这个格式）：
+### 方式一：主播（安装包自带，推荐）
+
+装完「花酱直播工作台」后，安装目录里会有 `mcp.json`。直接把它里面的内容贴进编辑器的 MCP 配置即可：
 
 ```json
 {
   "mcpServers": {
     "hana-live": {
-      "command": "npx",
-      "args": ["-y", "hana-live-mcp"]
+      "command": "C:\\Users\\你\\AppData\\Local\\花酱直播工作台\\runtime\\python\\python.exe",
+      "args": ["C:\\Users\\你\\AppData\\Local\\花酱直播工作台\\工作台\\mcp_server.py"]
     }
   }
 }
 ```
 
-国内网络如果拉包慢，可以先装到本地再指路径：
+路径照抄 `mcp.json` 里的真实值，不要照抄上面的示例。
 
-```bash
-npm i -g hana-live-mcp
-```
+### 方式二：开发者（clone 本仓库）
+
+`mcp_server.py` 只依赖 Python 标准库，不需要 `pip install`：
 
 ```json
 {
   "mcpServers": {
     "hana-live": {
-      "command": "hana-live-mcp"
+      "command": "python",
+      "args": ["D:\\路径\\hana-live-mcp\\mcp_server.py"]
     }
   }
 }
@@ -65,9 +68,22 @@ npm i -g hana-live-mcp
 {
   "mcpServers": {
     "hana-live": {
-      "command": "npx",
-      "args": ["-y", "hana-live-mcp"],
+      "command": "python",
+      "args": ["D:\\路径\\hana-live-mcp\\mcp_server.py"],
       "env": { "HANA_HOST": "http://127.0.0.1:8788" }
+    }
+  }
+}
+```
+
+### 方式三：npm（上架后可用）
+
+```json
+{
+  "mcpServers": {
+    "hana-live": {
+      "command": "npx",
+      "args": ["-y", "hana-live-mcp"]
     }
   }
 }
